@@ -32,7 +32,7 @@ Tojxml 3.0 完整支持以下功能。当然在构建时可仅保留需要功能
 
 ### 安装
 
-下载组件代码：
+[下载](https://github.com/jd-ftf/tojxml/releases/latest/download/tojxml.zip)组件代码：
 
 将 `tojxml` 文件夹放到小程序项目根目录中。
 
