@@ -4,8 +4,6 @@
 
 **Tojxml** 是一个可将`HTML`、`Markdown`转为京东小程序`JXML`(JingDong Markup Language)的渲染库。用于解决在微信小程序中`Markdown`、`HTML`不能直接渲染的问题。
 
-[**官方交流群：182874473（点击加入）**](https://jq.qq.com/?_wv=1027&k=54KTcZi)，进群答案：wiki和issues
-
 ## 特色
 
 Tojxml 3.0 完整支持以下功能。当然在构建时可仅保留需要功能以减少体积大小和代码依赖。
