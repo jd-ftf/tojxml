@@ -54,11 +54,11 @@ const fs = require('fs-extra'),
 class Build{
     constructor(option){
         const _ts = this;
-        _ts.tplPath = path.join('decode.wxml');
+        _ts.tplPath = path.join('decode.jxml');
         _ts.option = option;
         _ts.line = _ts.option.debug ? `\r\n` : '';
 
-        _ts.outDir = path.join(os.homedir(),'desktop',_ts.option.debug ? 'test' : '','towxml');
+        _ts.outDir = path.join(__dirname, './lib/tojxml');
         _ts.tplDir = path.join(__dirname);
     }
     
@@ -72,10 +72,10 @@ class Build{
             let result = [];
             
             // 添加根目录文件
-            ['config','decode','index','towxml'].forEach(item => {
+            ['config','decode','index','tojxml'].forEach(item => {
                 let itemPaths = (()=>{
                     let arr = [];
-                    ['js','json','wxml','wxss'].forEach(ext => {
+                    ['js','json','jxml','jxss'].forEach(ext => {
                         let itemPath = path.join(_ts.tplDir,`${item}.${ext}`),
                             itemPathInfo = getPathInfo(itemPath);
 
@@ -172,17 +172,17 @@ class Build{
         };
 
         // 创建自定义组件配置
-        let obj = {component:true,usingComponents:{decode:`/towxml/decode`}};
+        let obj = {component:true,usingComponents:{decode:`/tojxml/decode`}};
 
         config.components.forEach(item => {
-            obj.usingComponents[item] = `/towxml/${item}/${item}`
+            obj.usingComponents[item] = `/tojxml/${item}/${item}`
         });
         fs.writeFileSync(path.join(_ts.outDir,'decode.json'),JSON.stringify(obj,null,2));
 
         // 如果不启用highlight组件，则注释掉对应的样式
         if(!config.highlight.length){
             let styles = (()=>{
-                let files = ['dark.wxss','light.wxss'];
+                let files = ['dark.jxss','light.jxss'];
                 files.forEach((item,index) => {
                     files[index] = path.join(_ts.outDir,'style','theme',item);
                 });
@@ -206,12 +206,12 @@ class Build{
         const _ts = this,
             components = (()=>{
                 let str = ``;
-                [...config.wxml,...config.components].forEach(item => {
+                [...config.jxml,...config.components].forEach(item => {
                     str += _ts.getComponent(item);
                 });
                 return str;
             })(),
-            str = `<block wx:for="{{nodes.child}}" wx:for-index="i" wx:for-item="item" wx:key="i">${_ts.line}${_ts.tab(1)}<block wx:if="{{item.tag===undefined}}">{{item.text}}</block>${_ts.line}${components}</block>`;
+            str = `<block jd:for="{{nodes.child}}" jd:for-index="i" jd:for-item="item" jd:key="i">${_ts.line}${_ts.tab(1)}<block jd:if="{{item.tag===undefined}}">{{item.text}}</block>${_ts.line}${components}</block>`;
         fs.writeFileSync(_ts.tplPath,str);
     }
 
@@ -222,7 +222,7 @@ class Build{
             obj = (()=>{
                 let result = {};
                 config.components.forEach(item => {
-                    result[item] = `${_ts.tab(1)}<block wx:if="{{item.tag==='${tag}'}}">${_ts.line}${_ts.tab(2)}<${item} data="{{item}}" ${attrs}/>${_ts.line}${_ts.tab(1)}</block>${_ts.line}`;
+                    result[item] = `${_ts.tab(1)}<block jd:if="{{item.tag==='${tag}'}}">${_ts.line}${_ts.tab(2)}<${item} data="{{item}}" ${attrs}/>${_ts.line}${_ts.tab(1)}</block>${_ts.line}`;
                 });
                 return result;
             })();
@@ -230,9 +230,9 @@ class Build{
         if(tag && obj[tag]){
             return obj[tag];
         }else if(tag){
-            return `${_ts.tab(1)}<${tag} wx:if="{{item.tag==='${tag}'}}" ${attrs}>${_ts.line}${_ts.tab(2)}<decode wx:if="{{item.child}}" nodes="{{item}}"/>${_ts.line}${_ts.tab(1)}</${tag}>${_ts.line}`;
+            return `${_ts.tab(1)}<${tag} jd:if="{{item.tag==='${tag}'}}" ${attrs}>${_ts.line}${_ts.tab(2)}<decode jd:if="{{item.child}}" nodes="{{item}}"/>${_ts.line}${_ts.tab(1)}</${tag}>${_ts.line}`;
         }else{
-            return `${_ts.tab(1)}<block wx:if="{{item.tag===undefined}}">{{item.text}}</block>${_ts.line}`;
+            return `${_ts.tab(1)}<block jd:if="{{item.tag===undefined}}">{{item.text}}</block>${_ts.line}`;
         };
     }
 

@@ -1,7 +1,7 @@
 {
-  "name": "towxml",
+  "name": "tojxml",
   "version": "3.0.6",
-  "description": "HTML、Markdown转WXML(WeiXin Markup Language)渲染库",
+  "description": "HTML、Markdown转JXML(JD Markup Language)渲染库",
   "main": "index.js",
   "scripts": {
     "build": "node build",
@@ -9,21 +9,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sbfkcel/towxml.git"
+    "url": "git+https://github.com/sbfkcel/tojxml.git"
   },
   "keywords": [
-    "html to wxml",
-    "markdown to wxml",
-    "html2wxml",
-    "mark2wxml",
-    "wxml"
+    "html to jxml",
+    "markdown to jxml",
+    "html2jxml",
+    "mark2jxml",
+    "jxml"
   ],
   "author": "sbfkcel@163.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sbfkcel/towxml/issues"
+    "url": "https://github.com/sbfkcel/tojxml/issues"
   },
-  "homepage": "https://github.com/sbfkcel/towxml#readme",
+  "homepage": "https://github.com/sbfkcel/tojxml#readme",
   "dependencies": {
     "fs-extra": "^8.1.0"
   }

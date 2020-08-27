@@ -1,0 +1,8 @@
+/**基础风格样式**/
+@import './style/main.jxss';
+
+/**主题配色（浅色样式）**/
+@import './style/theme/light.jxss';
+
+/**主题配色（深色样式）**/
+@import './style/theme/dark.jxss';

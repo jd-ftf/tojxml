@@ -1,0 +1,24 @@
+<!--table-->
+<block jd:if="{{data.tag === 'table'}}">
+    <view class="h2w__tableParent">
+        <view class="{{data.attr.class}}" width="{{data.attr.width}}" style="{{data.attr.style}}">
+            <!--thead、tbody、tfoot-->
+            <block jd:if="{{data.child}}" jd:for="{{data.child}}" jd:for-item="item" jd:key="i">
+                <view jd:if="{{item.tag}}" class="{{item.attr.class}}">
+                    <!--tr-->
+                    <block jd:if="{{item.child}}" jd:for="{{item.child}}" jd:for-item="item" jd:key="i">
+                        <view jd:if="{{item.tag}}" class="{{item.attr.class}}">
+                            <!--td-->
+                            <block jd:if="{{item.child}}" jd:for="{{item.child}}" jd:for-item="item" jd:key="i">
+                                <view jd:if="{{item.tag}}" class="{{item.attr.class}}" width="{{data.attr.width}}" style="{{data.attr.style}}">
+                                    <!--content-->
+                                    <decode jd:if="{{item.child}}" nodes="{{item}}"/>
+                                </view>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+            </block>
+        </view>
+    </view>
+</block>

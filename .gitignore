@@ -1,5 +1,6 @@
-/demo/towxml/
+/demo/tojxml/
 /node_modules/
 /.vscode/
 .DS_Store
 project.config.json
+dist
